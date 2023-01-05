@@ -145,7 +145,24 @@ export default function UserPage() {
   const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
 
   const isNotFound = !filteredUsers.length && !!filterName;
-
+  async function uploadFile(e) {
+    e.preventDefault();
+  
+    // When a post request is sent to the create url, we'll add a new record to the database.
+  
+    await fetch("http://localhost:4000/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: e.value,
+    })
+    
+    .catch(error => {
+      window.alert(error);
+      return;
+    });
+  }
   return (
     <>
       <Helmet>
@@ -153,15 +170,16 @@ export default function UserPage() {
       </Helmet>
 
       <Container>
+
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             User
           </Typography>
-          <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
+          <Button variant="contained" component="label" startIcon={<Iconify icon="eva:plus-fill" />}>
+            Upload
+            <input onChange={uploadFile} hidden accept="image/*" multiple type="file" />
           </Button>
         </Stack>
-
         <Card>
           <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
 
