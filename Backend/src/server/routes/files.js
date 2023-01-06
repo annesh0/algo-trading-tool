@@ -16,10 +16,19 @@ fileRoutes.route("/add").post(function (req, response) {
     });
 });
 
-fileRoutes.route("/").get(function (req, response) {
-    let db_connect = dbo.getDb('data');
-    if (err) throw err;
-      response.json(res);
-});
+fileRoutes.route("/data").get(function (req, res) {
+    let db_connect = dbo.getDb("data");
+    db_connect
+      .collection("data")
+      .find({})
+      .toArray(function (err, result) {
+        if (err) throw err;
+        res.json(result);
+      });
+   });
+
+// fileRoutes.route("/").get(function (req, response) {
+//     let db_connect = dbo.getDb('data');
+// });
 
 module.exports = fileRoutes;

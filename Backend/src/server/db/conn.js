@@ -19,7 +19,6 @@ module.exports = {
       return callback(err);
          });
   },
-
  
   getDb: function () {
     return _db;

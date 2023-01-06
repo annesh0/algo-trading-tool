@@ -147,13 +147,13 @@ export default function UserPage() {
   const isNotFound = !filteredUsers.length && !!filterName;
   async function uploadFile(e) {
     e.preventDefault();
-  
+    console.log("a")
     // When a post request is sent to the create url, we'll add a new record to the database.
   
     await fetch("http://localhost:4000/add", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "Application/BSON",
       },
       body: e.value,
     })
@@ -177,7 +177,7 @@ export default function UserPage() {
           </Typography>
           <Button variant="contained" component="label" startIcon={<Iconify icon="eva:plus-fill" />}>
             Upload
-            <input onChange={uploadFile} hidden accept="image/*" multiple type="file" />
+            <input onChange={uploadFile} hidden accept="/*" multiple type="file" />
           </Button>
         </Stack>
         <Card>
