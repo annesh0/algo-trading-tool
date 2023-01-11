@@ -3,6 +3,8 @@ import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
 import { useState } from 'react';
 // @mui
+import axios from 'axios';
+
 import {
   Card,
   Table,
@@ -163,6 +165,24 @@ export default function UserPage() {
       return;
     });
   }
+
+  async function uploadImage(e){
+    if (!e.state.caption.trim() || !e.state.uploadedImage.name) {
+        return alert('Caption or file is missing');
+    }
+
+    let formData = new FormData();
+    formData.append('caption', e.state.caption);
+    formData.append('file', e.state.uploadedImage);
+
+    axios.post('http://localhost:4000/', formData)
+        .then((response) => {
+            response.data.success ? alert('File successfully uploaded') : alert('File already exists');
+            e.fetchRecent();
+        })
+        .catch(err => alert('Error: ' + err));
+  }
+
   return (
     <>
       <Helmet>
@@ -178,6 +198,9 @@ export default function UserPage() {
           <Button variant="contained" component="label" startIcon={<Iconify icon="eva:plus-fill" />}>
             Upload
             <input onChange={uploadFile} hidden accept="/*" multiple type="file" />
+            <input type="file" onChange={(event) => {
+                                uploadImage();
+                            }}/>
           </Button>
         </Stack>
         <Card>
