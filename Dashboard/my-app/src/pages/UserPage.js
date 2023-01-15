@@ -23,6 +23,7 @@ import {
   IconButton,
   TableContainer,
   TablePagination,
+  toggleButtonGroupClasses,
 } from '@mui/material';
 // components
 import Label from '../components/label';
@@ -74,7 +75,6 @@ function applySortFilter(array, comparator, query) {
   }
   return stabilizedThis.map((el) => el[0]);
 }
-
 export default function UserPage() {
   const [open, setOpen] = useState(null);
 
@@ -147,6 +147,30 @@ export default function UserPage() {
   const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
 
   const isNotFound = !filteredUsers.length && !!filterName;
+
+  var state = {
+    profileImg:''
+  }
+
+  async function onFileChange(e) {
+    state = {profileImg: e.target.files[0]}
+    e.preventDefault()
+    const formData = new FormData()
+    formData.append('profileImg',state.profileImg)
+    axios.post("http://localhost:4000/api/user-profile", formData, {
+  }).then(res => {
+      console.log(res)
+    })
+  }
+  async function onSubmit(e) {
+    e.preventDefault()
+    const formData = new FormData()
+    formData.append('profileImg',state.profileImg)
+    axios.post("http://localhost:4000/api/user-profile", formData, {
+  }).then(res => {
+      console.log(res)
+    })
+  }
   async function uploadFile(e) {
     e.preventDefault();
     console.log("a")
@@ -197,10 +221,7 @@ export default function UserPage() {
           </Typography>
           <Button variant="contained" component="label" startIcon={<Iconify icon="eva:plus-fill" />}>
             Upload
-            <input onChange={uploadFile} hidden accept="/*" multiple type="file" />
-            <input type="file" onChange={(event) => {
-                                uploadImage();
-                            }}/>
+            <input type="file" hidden accept="/py" onChange={onFileChange}/>
           </Button>
         </Stack>
         <Card>
