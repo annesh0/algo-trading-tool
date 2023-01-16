@@ -162,50 +162,51 @@ export default function UserPage() {
       console.log(res)
     })
   }
-  async function onSubmit(e) {
-    e.preventDefault()
-    const formData = new FormData()
-    formData.append('profileImg',state.profileImg)
-    axios.post("http://localhost:4000/api/user-profile", formData, {
-  }).then(res => {
-      console.log(res)
-    })
-  }
-  async function uploadFile(e) {
-    e.preventDefault();
-    console.log("a")
-    // When a post request is sent to the create url, we'll add a new record to the database.
+
+  // async function onSubmit(e) {
+  //   e.preventDefault()
+  //   const formData = new FormData()
+  //   formData.append('profileImg',state.profileImg)
+  //   axios.post("http://localhost:4000/api/user-profile", formData, {
+  // }).then(res => {
+  //     console.log(res)
+  //   })
+  // }
+  // async function uploadFile(e) {
+  //   e.preventDefault();
+  //   console.log("a")
+  //   // When a post request is sent to the create url, we'll add a new record to the database.
   
-    await fetch("http://localhost:4000/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "Application/BSON",
-      },
-      body: e.value,
-    })
+  //   await fetch("http://localhost:4000/add", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "Application/BSON",
+  //     },
+  //     body: e.value,
+  //   })
     
-    .catch(error => {
-      window.alert(error);
-      return;
-    });
-  }
+  //   .catch(error => {
+  //     window.alert(error);
+  //     return;
+  //   });
+  // }
 
-  async function uploadImage(e){
-    if (!e.state.caption.trim() || !e.state.uploadedImage.name) {
-        return alert('Caption or file is missing');
-    }
+  // async function uploadImage(e){
+  //   if (!e.state.caption.trim() || !e.state.uploadedImage.name) {
+  //       return alert('Caption or file is missing');
+  //   }
 
-    let formData = new FormData();
-    formData.append('caption', e.state.caption);
-    formData.append('file', e.state.uploadedImage);
+  //   let formData = new FormData();
+  //   formData.append('caption', e.state.caption);
+  //   formData.append('file', e.state.uploadedImage);
 
-    axios.post('http://localhost:4000/', formData)
-        .then((response) => {
-            response.data.success ? alert('File successfully uploaded') : alert('File already exists');
-            e.fetchRecent();
-        })
-        .catch(err => alert('Error: ' + err));
-  }
+  //   axios.post('http://localhost:4000/', formData)
+  //       .then((response) => {
+  //           response.data.success ? alert('File successfully uploaded') : alert('File already exists');
+  //           e.fetchRecent();
+  //       })
+  //       .catch(err => alert('Error: ' + err));
+  // }
 
   return (
     <>
@@ -217,11 +218,11 @@ export default function UserPage() {
 
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            User
+            Strategies
           </Typography>
           <Button variant="contained" component="label" startIcon={<Iconify icon="eva:plus-fill" />}>
             Upload
-            <input type="file" hidden accept="/py" onChange={onFileChange}/>
+            <input type="file" hidden formEncType='multipart/form-data' accept=".py" onChange={onFileChange}/>
           </Button>
         </Stack>
         <Card>
