@@ -225,7 +225,7 @@ export default function UserPage() {
             <input type="file" hidden formEncType='multipart/form-data' accept=".py" onChange={onFileChange}/>
           </Button>
         </Stack>
-        <Card>
+        {/* <Card>
           <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
 
           <Scrollbar>
@@ -321,7 +321,7 @@ export default function UserPage() {
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
-        </Card>
+        </Card> */}
       </Container>
 
       <Popover

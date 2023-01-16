@@ -36,7 +36,7 @@ export default function DashboardAppPage() {
 
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Total Value" total={74000} icon={'ant-design:android-filled'} />
+            <AppWidgetSummary title="Total Value ($)" total={121} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
@@ -63,8 +63,8 @@ export default function DashboardAppPage() {
               chartData={[
                 {
                   name: 'Portfolio A',
-                  type: 'column',
-                  fill: 'solid',
+                  type: 'area',
+                  fill: 'gradient',
                   data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
                 },
                 {
@@ -75,8 +75,8 @@ export default function DashboardAppPage() {
                 },
                 {
                   name: 'Portfolio C',
-                  type: 'line',
-                  fill: 'solid',
+                  type: 'area',
+                  fill: 'gradient',
                   data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
                 },
               ]}
