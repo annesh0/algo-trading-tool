@@ -156,8 +156,8 @@ export default function UserPage() {
     state = {profileImg: e.target.files[0]}
     e.preventDefault()
     const formData = new FormData()
-    formData.append('profileImg',state.profileImg)
-    axios.post("http://localhost:4000/api/user-profile", formData, {
+    formData.append('file',state.profileImg)
+    axios.post("http://localhost:5001/upload", formData, {
   }).then(res => {
       console.log(res)
     })

@@ -12,6 +12,10 @@ const methodOverride = require('method-override');
 const app = express();
 
 app.use(bodyParser.json());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 app.use(methodOverride('_method'));
 app.set('view engine', 'jade');
 
@@ -45,7 +49,7 @@ const upload = multer({ storage });
 
 //@route POST, Upload
 app.post('/upload', upload.single('file'), (req, res) => {
-    res.json({file: req.file})
+  res.json({file: req.file});
 })
 
 const port = 5001
